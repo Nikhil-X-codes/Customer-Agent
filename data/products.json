@@ -1,0 +1,14 @@
+[
+  {
+    "id": "travel-mug",
+    "name": "Travel Mug",
+    "terms": ["travel mug"],
+    "answer": "The Travel Mug holds 350 mL and is made of stainless steel. It is not dishwasher safe. This is demo catalog data."
+  },
+  {
+    "id": "canvas-tote",
+    "name": "Canvas Tote",
+    "terms": ["canvas tote"],
+    "answer": "The Canvas Tote is made of cotton canvas and measures 38 × 42 cm. This is demo catalog data."
+  }
+]

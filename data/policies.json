@@ -1,0 +1,17 @@
+[
+  {
+    "id": "shipping",
+    "terms": ["shipping policy", "shipping cost", "shipping fee", "shipping options"],
+    "answer": "Standard shipping is free for orders over $50. For orders of $50 or less, standard shipping costs $5. Express shipping costs $12. These are demo store terms."
+  },
+  {
+    "id": "returns",
+    "terms": ["return policy", "return window", "returns policy"],
+    "answer": "Unused items in original packaging may be returned within 30 days of delivery. Contact support to start a return. These are demo store terms."
+  },
+  {
+    "id": "warranty",
+    "terms": ["warranty", "guarantee period"],
+    "answer": "Products have a one-year limited warranty against manufacturing defects. Contact support for a claim review. These are demo store terms."
+  }
+]

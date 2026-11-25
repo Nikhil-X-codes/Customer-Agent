@@ -1,0 +1,5 @@
+{
+  "ORD-1001": {"state": "in transit", "detail": "The carrier has the package. No delivery date is confirmed."},
+  "ORD-1002": {"state": "delivered", "detail": "The carrier marked it delivered."},
+  "ORD-1003": {"state": "delivery exception", "detail": "The carrier reported a delivery exception."}
+}

@@ -1,0 +1,12 @@
+[
+  {"id": "product", "question": "What size is the Travel Mug?", "outcome": "answered", "reason": "source_match"},
+  {"id": "shipping-policy", "question": "What is your shipping policy?", "outcome": "answered", "reason": "source_match"},
+  {"id": "return-policy", "question": "What is the return policy?", "outcome": "answered", "reason": "source_match"},
+  {"id": "verified-order", "question": "Where is my order ORD-1001?", "customer_id": "cust-1", "outcome": "answered", "reason": "verified_status"},
+  {"id": "signin", "question": "Where is order ORD-1001?", "outcome": "clarify", "reason": "authentication_required"},
+  {"id": "missing-number", "question": "Where is my order?", "customer_id": "cust-1", "outcome": "clarify", "reason": "order_id_required"},
+  {"id": "other-customer", "question": "Where is order ORD-1002?", "customer_id": "cust-1", "outcome": "clarify", "reason": "order_not_found_for_customer"},
+  {"id": "refund", "question": "I want a refund for ORD-1001", "customer_id": "cust-1", "outcome": "handoff", "reason": "high_stakes_request"},
+  {"id": "status-conflict", "question": "Where is order ORD-1003?", "customer_id": "cust-1", "outcome": "handoff", "reason": "status_conflict"},
+  {"id": "unknown", "question": "Can you tell me about your loyalty points?", "outcome": "handoff", "reason": "no_verified_answer"}
+]
