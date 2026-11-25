@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.parse import quote
-from urllib.request import Request, urlopen
+from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
@@ -62,7 +62,8 @@ class HttpStatusProvider:
         request = Request(url, headers={"Authorization": f"Bearer {self.token}",
                                         "Accept": "application/json"})
         try:
-            with urlopen(request, timeout=self.timeout) as response:
+            # Do not forward the bearer token to a redirect destination.
+            with build_opener(_NoRedirect()).open(request, timeout=self.timeout) as response:
                 payload = json.load(response)
             observed = datetime.fromisoformat(payload["observed_at"].replace("Z", "+00:00"))
             if observed.tzinfo is None:
@@ -73,6 +74,11 @@ class HttpStatusProvider:
                           observed, "live status API")
         except (HTTPError, URLError, TimeoutError, ValueError, KeyError, TypeError) as exc:
             raise StatusError("Status service unavailable or invalid") from exc
+
+
+class _NoRedirect(HTTPRedirectHandler):
+    def redirect_request(self, request, fp, code, msg, headers, newurl):
+        return None
 
 
 class StoreData:
