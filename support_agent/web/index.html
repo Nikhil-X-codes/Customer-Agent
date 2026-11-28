@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f8">
+  <meta name="description" content="Ask a question about current operations or store information.">
+  <title>Support workspace</title>
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="workspace">
+    <aside class="sidebar" aria-label="Workspace navigation">
+      <div class="product-lockup"><span class="product-mark select-none" aria-hidden="true">C</span><div><strong>Customer Agent</strong><span>Support workspace</span></div></div>
+      <div class="sidebar-group">
+        <div class="sidebar-label">WORKSPACE</div>
+        <a class="nav-link active" href="/" aria-current="page"><span aria-hidden="true" class="nav-symbol">▤</span>Conversation</a>
+        <a class="nav-link" id="docsLink" href="/admin" hidden><span aria-hidden="true" class="nav-symbol">▦</span>Documents</a>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="sidebar-help"><strong>Need a person?</strong><p>Requests that need review create a ticket for your team.</p></div>
+        <div class="source-state" id="sourceState" role="status"><span class="state-indicator" aria-hidden="true"></span><span id="sourceText">Checking service</span></div>
+      </div>
+    </aside>
+
+    <main class="main-panel">
+      <header class="topbar">
+        <div class="page-heading"><span class="page-kicker" id="workspaceLabel">SUPPORT</span><h1 id="pageTitle">Conversation</h1></div>
+        <div class="top-actions">
+          <span class="mode-label" id="modeLabel">Store support</span>
+          <a class="header-docs-link" id="headerDocsLink" href="/admin" hidden>Documents</a>
+          <button class="session-button transition-colors" id="sessionToggle" type="button" aria-expanded="false" aria-controls="sessionPanel">Connect session</button>
+        </div>
+      </header>
+
+      <section class="session-panel" id="sessionPanel" hidden aria-label="Session access">
+        <div><strong>Session access</strong><p>Paste a signed token from your company sign-in. It stays in this browser tab and is checked when you ask a question.</p></div>
+        <div class="session-form"><label for="tokenInput">Session token</label><div class="session-fields"><input id="tokenInput" type="password" autocomplete="off" placeholder="Paste token"><button id="saveToken" type="button">Use token</button><button id="clearToken" class="plain-button" type="button" hidden>Remove</button></div><span id="sessionStatus" role="status">No session token set</span></div>
+      </section>
+
+      <section class="chat-area" id="conversation" role="log" aria-label="Conversation" aria-live="polite" aria-relevant="additions text">
+        <div class="chat-column">
+          <div class="empty-state" id="emptyState">
+            <div class="empty-icon" aria-hidden="true">▤</div>
+            <h2 id="welcomeTitle">What can I help with?</h2>
+            <p id="welcomeDescription">Ask about a product, policy, or order. I’ll use current sources and send anything uncertain for review.</p>
+            <div class="prompt-list" id="promptList" aria-label="Starting points"></div>
+          </div>
+          <div id="messages"></div>
+        </div>
+      </section>
+
+      <div class="composer-area">
+        <div class="composer-inner">
+          <form id="chatForm" class="composer">
+            <label class="sr-only" for="question">Your question</label>
+            <textarea id="question" rows="2" maxlength="2000" placeholder="Ask a question…" required></textarea>
+            <button id="sendButton" class="send-button transition-colors" type="submit">Send</button>
+          </form>
+          <p class="composer-hint" id="composerHint">Order details require a signed session. Decisions are based on current sources.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

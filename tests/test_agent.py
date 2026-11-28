@@ -1,7 +1,7 @@
 import unittest
 from datetime import datetime, timedelta, timezone
 
-from support_agent.agent import SupportAgent
+from test_helpers import test_agent
 from support_agent.auth import issue_token, verify_token
 from support_agent.data import Status, StatusError
 
@@ -19,7 +19,7 @@ class FixedProvider:
 
 class AgentTests(unittest.TestCase):
     def setUp(self):
-        self.agent = SupportAgent()
+        self.agent = test_agent()
 
     def test_policy_is_answered_from_source(self):
         reply = self.agent.answer("What is your shipping policy?")
@@ -39,12 +39,12 @@ class AgentTests(unittest.TestCase):
 
     def test_stale_status_hands_off(self):
         old = datetime.now(timezone.utc) - timedelta(hours=1)
-        agent = SupportAgent(status_provider=FixedProvider(Status(
+        agent = test_agent(status_provider=FixedProvider(Status(
             "ORD-1001", "in transit", "", old, "test")))
         self.assertEqual(agent.answer("Where is ORD-1001?", "cust-1").reason, "status_stale")
 
     def test_status_error_hands_off(self):
-        agent = SupportAgent(status_provider=FixedProvider(error=True))
+        agent = test_agent(status_provider=FixedProvider(error=True))
         self.assertEqual(agent.answer("Where is ORD-1001?", "cust-1").reason, "status_unavailable")
 
     def test_high_stakes_wins(self):

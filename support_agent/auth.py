@@ -18,8 +18,10 @@ def _decode(value: str) -> bytes:
 
 
 def issue_token(customer_id: str, secret: str, ttl_seconds: int = 3600) -> str:
-    if not customer_id or not secret or ttl_seconds <= 0:
-        raise ValueError("customer_id, secret, and positive TTL required")
+    if (not isinstance(customer_id, str) or not customer_id.strip() or
+            len(customer_id) > 128 or not secret or
+            not isinstance(ttl_seconds, int) or not 1 <= ttl_seconds <= 86_400):
+        raise ValueError("subject, secret, and TTL from 1 second to 24 hours required")
     body = _encode(json.dumps({"sub": customer_id, "exp": int(time.time()) + ttl_seconds},
                               separators=(",", ":")).encode())
     signature = _encode(hmac.new(secret.encode(), body.encode(), hashlib.sha256).digest())
@@ -35,9 +37,11 @@ def verify_token(token: str, secret: str) -> str | None:
         if not hmac.compare_digest(signature, expected):
             return None
         payload = json.loads(_decode(body))
-        if not isinstance(payload.get("sub"), str) or not payload["sub"]:
+        if (not isinstance(payload.get("sub"), str) or not payload["sub"].strip() or
+                len(payload["sub"]) > 128):
             return None
-        if not isinstance(payload.get("exp"), int) or payload["exp"] <= time.time():
+        if (not isinstance(payload.get("exp"), int) or
+                not time.time() < payload["exp"] <= time.time() + 86_400):
             return None
         return payload["sub"]
     except (ValueError, TypeError, KeyError, UnicodeDecodeError):

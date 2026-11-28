@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "customer-agent": {
+      "command": "/absolute/path/to/customer-agent/.venv/bin/customer-agent-mcp",
+      "env": {
+        "CUSTOMER_AGENT_ENV_FILE": "/absolute/path/to/customer-agent/.env"
+      }
+    }
+  }
+}

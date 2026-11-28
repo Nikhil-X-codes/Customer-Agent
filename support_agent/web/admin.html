@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7f8">
+  <title>Documents · Customer Agent</title>
+  <link rel="stylesheet" href="/app.css">
+  <script src="/admin.js" defer></script>
+</head>
+<body class="admin-page">
+  <main class="admin-shell">
+    <header class="admin-header"><div class="product-lockup"><span class="product-mark select-none" aria-hidden="true">C</span><div><strong>Customer Agent</strong><span>Document management</span></div></div><a href="/">Back to conversation</a></header>
+    <div class="admin-intro"><span class="page-kicker">KNOWLEDGE</span><h1>Documents</h1><p id="adminDescription">Add approved store guidance. New uploads become available to the assistant without a restart. Order details continue to come from the live source.</p></div>
+    <div class="admin-grid">
+      <section class="admin-card shadow-sm" aria-labelledby="accessTitle"><h2 id="accessTitle">Access</h2><p>Enter your admin key to manage documents. The key stays in this browser tab.</p><label for="adminKey">Admin API key</label><div class="admin-inline"><input id="adminKey" type="password" autocomplete="off" placeholder="Paste key"><button id="unlock" type="button">Unlock</button></div><p class="admin-status" id="accessStatus" role="status">Enter your key to continue.</p></section>
+      <section class="admin-card shadow-sm" aria-labelledby="uploadTitle"><h2 id="uploadTitle">Add document</h2><p>Text, Markdown, or text-based PDF, up to 5 MB. The same filename replaces the previous version.</p><form id="uploadForm"><label for="documentFile">Document file</label><input id="documentFile" type="file" accept=".txt,.md,.pdf" required><button type="submit">Upload document</button></form><p class="admin-status" id="uploadStatus" role="status"></p></section>
+    </div>
+    <section class="admin-card documents-card" aria-labelledby="documentsTitle"><div class="section-heading"><h2 id="documentsTitle">Current documents</h2><button id="refresh" type="button" class="secondary-button">Refresh</button></div><div id="documents" class="documents-list"><p>Unlock access to view documents.</p></div></section>
+    <p class="admin-footnote">Upload only approved content. Remove outdated guidance promptly. Scanned PDFs need OCR before upload.</p>
+  </main>
+</body>
+</html>

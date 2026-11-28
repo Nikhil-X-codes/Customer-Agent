@@ -5,6 +5,10 @@ __pycache__/
 .coverage
 .env
 *.db
+var/
 dist/
 build/
 *.egg-info/
+
+node_modules/
+.npm-cache/

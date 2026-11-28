@@ -4,12 +4,22 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "customer-agent"
-version = "0.1.0"
-description = "Grounded customer support agent with explicit handoff rules"
+version = "0.3.0"
+description = "Embeddable supply chain and customer support agent with guarded handoffs"
 requires-python = ">=3.10"
 
 [project.scripts]
 customer-agent = "support_agent.cli:main"
+customer-agent-mcp = "support_agent.mcp_server:main"
+
+[project.optional-dependencies]
+pdf = ["pypdf>=6,<7"]
+knowledge = ["qdrant-client>=1.15,<1.17", "fastembed>=0.4,<1", "pypdf>=6,<7"]
+mcp = ["mcp>=1.10,<2"]
+oidc = ["PyJWT[crypto]>=2.10,<3"]
 
 [tool.setuptools.packages.find]
 include = ["support_agent*"]
+
+[tool.setuptools.package-data]
+support_agent = ["web/*"]

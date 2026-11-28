@@ -1,0 +1,13 @@
+{
+  "name": "customer-agent-ui",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "build:css": "tailwindcss -c tailwind.config.cjs -i assets/tailwind.css -o support_agent/web/app.css --minify",
+    "watch:css": "tailwindcss -c tailwind.config.cjs -i assets/tailwind.css -o support_agent/web/app.css --watch",
+    "dev": "npm run build:css && python -m support_agent.cli serve"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

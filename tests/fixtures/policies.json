@@ -1,7 +1,7 @@
 [
   {
     "id": "shipping",
-    "terms": ["shipping policy", "shipping cost", "shipping fee", "shipping options"],
+    "terms": ["shipping policy", "shipping cost", "shipping fee", "shipping options", "how much is shipping"],
     "answer": "Standard shipping is free for orders over $50. For orders of $50 or less, standard shipping costs $5. Express shipping costs $12. These are demo store terms."
   },
   {

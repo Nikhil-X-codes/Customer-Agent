@@ -1,0 +1,134 @@
+[
+  {
+    "id": "auth",
+    "question": "How much stock is available for SKU-100?",
+    "outcome": "clarify",
+    "reason": "authentication_required"
+  },
+  {
+    "id": "inventory",
+    "question": "How much stock is available for SKU-100?",
+    "customer_id": "planner-1",
+    "outcome": "answered",
+    "reason": "inventory_snapshot",
+    "source": "inventory:SKU-100",
+    "message_contains": "95 available"
+  },
+  {
+    "id": "low-inventory",
+    "question": "Show inventory for SKU-200",
+    "customer_id": "planner-1",
+    "outcome": "answered",
+    "reason": "inventory_snapshot",
+    "message_contains": "At or below"
+  },
+  {
+    "id": "low-stock-list",
+    "question": "Which SKUs are low stock?",
+    "customer_id": "planner-1",
+    "outcome": "answered",
+    "reason": "low_stock_check",
+    "source": "inventory:SKU-200"
+  },
+  {
+    "id": "missing-sku",
+    "question": "How much inventory is available?",
+    "customer_id": "planner-1",
+    "outcome": "clarify",
+    "reason": "sku_required"
+  },
+  {
+    "id": "unknown-sku",
+    "question": "Check SKU-999 stock",
+    "customer_id": "planner-1",
+    "outcome": "clarify",
+    "reason": "sku_not_found"
+  },
+  {
+    "id": "purchase-order",
+    "question": "What is the status of PO-2001?",
+    "customer_id": "planner-1",
+    "outcome": "answered",
+    "reason": "purchase_order_snapshot",
+    "source": "purchase_orders:PO-2001"
+  },
+  {
+    "id": "missing-po",
+    "question": "What is the purchase order status?",
+    "customer_id": "planner-1",
+    "outcome": "clarify",
+    "reason": "po_id_required"
+  },
+  {
+    "id": "shipment",
+    "question": "Where is shipment SHP-3001?",
+    "customer_id": "planner-1",
+    "outcome": "answered",
+    "reason": "shipment_snapshot",
+    "source": "shipments:SHP-3001"
+  },
+  {
+    "id": "overdue",
+    "question": "Where is shipment SHP-3003?",
+    "customer_id": "planner-1",
+    "outcome": "handoff",
+    "reason": "shipment_overdue",
+    "source": "shipments:SHP-3003"
+  },
+  {
+    "id": "missing-shipment",
+    "question": "What is the shipment ETA?",
+    "customer_id": "planner-1",
+    "outcome": "clarify",
+    "reason": "shipment_id_required"
+  },
+  {
+    "id": "action",
+    "question": "Please expedite shipment SHP-3001",
+    "customer_id": "planner-1",
+    "outcome": "handoff",
+    "reason": "action_requires_human"
+  },
+  {
+    "id": "reorder-action",
+    "question": "Reorder SKU-200 now",
+    "customer_id": "planner-1",
+    "outcome": "handoff",
+    "reason": "action_requires_human"
+  },
+  {
+    "id": "reorder-point",
+    "question": "What is the stock at SKU-200 and its reorder point?",
+    "customer_id": "planner-1",
+    "outcome": "answered",
+    "reason": "inventory_snapshot"
+  },
+  {
+    "id": "ambiguous",
+    "question": "Compare SKU-200 with PO-2001",
+    "customer_id": "planner-1",
+    "outcome": "clarify",
+    "reason": "multiple_references"
+  },
+  {
+    "id": "unknown",
+    "question": "Forecast demand next quarter",
+    "customer_id": "planner-1",
+    "outcome": "handoff",
+    "reason": "no_verified_answer"
+  },
+  {
+    "id": "po-quantity",
+    "question": "What quantity is in PO-2001?",
+    "customer_id": "planner-1",
+    "outcome": "answered",
+    "reason": "purchase_order_snapshot"
+  },
+  {
+    "id": "po-shipment-clarify",
+    "question": "Which shipment carries PO-2001?",
+    "customer_id": "planner-1",
+    "outcome": "clarify",
+    "reason": "shipment_id_required"
+  }
+]

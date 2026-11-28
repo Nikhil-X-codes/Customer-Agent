@@ -1,39 +1,101 @@
 # Delivery phases
 
-## Phase 1 — Safe runnable baseline (complete)
+## Production integration boundary (implemented); company integration pending
 
-- [x] Define answer, clarification, and handoff outcomes.
-- [x] Add fictional policy, product, order, and status sources.
-- [x] Enforce ownership before status lookup.
-- [x] Hand off high-stakes requests and uncertain answers.
-- [x] Add CLI, HTTP interface, labeled evaluation, tests, README, and security guide.
+- [x] Add OIDC RS256 access-token verification with issuer, audience, and staff role checks.
+- [x] Bound HTTP workers and requests, return request IDs, and log decisions without customer text.
+- [x] Fail closed on unexpected agent and handoff failures.
+- [x] Provide a reference hardened deployment and readiness checks.
+- [ ] Connect a company identity provider, source, ticket workflow, and monitoring.
 
-Exit check: local tests pass and each answer names a source.
+## Embeddable SDK (implemented); company integration pending
 
-## Phase 2 — Real store integration (requires store systems)
+- [x] Expose a typed Python entry point for supply chain and customer support.
+- [x] Accept company read-only source and human ticket adapters.
+- [x] Return source-backed explanations and explicit ticket delivery status.
+- [x] Fail closed on source outages, bad adapter data, and ticket sink errors.
+- [ ] Connect a company SSO session, authorized source, and ticket workflow.
+- [ ] Run held-out evaluation and end-to-end staging checks with company data.
 
-- [ ] Replace demo policy and product JSON with versioned, approved store content.
-- [ ] Replace demo order JSON with a read-only order table adapter.
-- [ ] Connect the HTTPS live status endpoint and map its state vocabulary.
-- [ ] Integrate storefront sign-in with short-lived customer tokens.
-- [ ] Deliver structured handoffs to the human support queue.
+## Supply chain extension (runtime source enforcement complete); company integrations pending
 
-Exit check: authorized users see only their own orders; every status answer agrees with a fresh upstream record; a human receives a complete handoff.
+- [x] Add a separate supply chain mode for inventory, purchase orders, and shipments.
+- [x] Require verified operations identity, read current tables, and check freshness and valid states.
+- [x] Hand off changes, overdue records, stale data, and uncertainty; persist tickets.
+- [x] Adapt the browser UI and MCP tool to the selected domain.
+- [x] Isolate uploaded supply guidance in its own Qdrant collection and add labeled local evaluation.
+- [ ] Connect actual ERP/WMS/TMS feeds, staff identity, approved documents, and an operations team.
+- [ ] Measure accuracy and handoff quality on redacted real supply chain questions.
 
-## Phase 3 — Accuracy and reliability (requires representative questions)
+## Multi-agent tool calling (simulated-provider tested); live provider validation pending
 
-- [ ] Create a held-out set from real, redacted customer questions with expected answer and routing labels.
-- [ ] Measure answer correctness, unsafe answer rate, handoff recall and precision, and latency.
-- [ ] Expand paraphrase handling only with source-backed answers and regression cases.
-- [ ] Test timeouts, stale timestamps, mismatched IDs, conflicting states, and prompt injection attempts.
+- [x] Add a supervisor and domain specialists with one allowlisted read-only tool call per question.
+- [x] Validate route confidence, tool arguments, exact record IDs, freshness, and evidence before reply.
+- [x] Add Groq primary and OpenRouter transient-failure fallback.
+- [x] Test function calls, fallback, invalid decisions, and human handoff with simulated providers.
+- [ ] Test Groq and OpenRouter with real keys and approved staging data.
+- [ ] Evaluate routing and tool accuracy on held-out real operations questions.
 
-Exit check: agreed accuracy and safety thresholds pass on a held-out set; the conflict case still hands off.
+## Real-data guardrails (implemented); source integration pending
 
-## Phase 4 — Launch and operations (requires deployment environment)
+- [x] Require explicit serving mode and production-only startup.
+- [x] Reject demo supply databases and stale source metadata in production.
+- [x] Add a read-only HTTPS supply gateway contract with freshness and response checks.
+- [x] Use live document collections only.
+- [ ] Connect an actual ERP/WMS/TMS feed and staff identity service.
+- [ ] Validate the external schema, authorization, freshness, and human ticket flow in staging.
 
-- [ ] Put the API behind TLS, authentication, rate limits, and monitoring.
-- [ ] Configure secrets, audit access, retention, and incident response.
-- [ ] Start with a small traffic slice and review handoffs and wrong answers daily.
-- [ ] Set an owner and review cadence for policy and catalog changes.
+## Phase 1 — Safe baseline (complete)
 
-Exit check: support staff can process handoffs, and monitoring shows no unauthorized status disclosure or unhandled upstream failure.
+- [x] Ground product and policy answers in curated records.
+- [x] Check customer identity and order ownership before status lookup.
+- [x] Stop and hand off high-stakes or uncertain requests.
+- [x] Add CLI, HTTP interface, tests, and a labeled evaluation set.
+- [x] Add a responsive browser chat UI with progress and streamed verified replies.
+
+## Phase 2 — Integration-ready local flow (complete); real store connection pending
+
+- [x] Add a read-only SQLite order table adapter.
+- [x] Add a read-only dynamic catalog adapter; policy and product updates appear on the next request.
+- [x] Add an HTTPS live status adapter with timeout, freshness, identity, and response limits.
+- [x] Persist tickets to a local SQLite support queue; support list and close operations.
+- [x] Require real data configuration in production mode and reject demo fallback.
+- [ ] Provide an approved catalog sync, real order database, and live status endpoint.
+- [ ] Connect the store's actual sign-in system to token issuance and its human team to the queue.
+
+## Phase 2b — Uploaded knowledge (local flow complete); real content pending
+
+- [x] Add administrator-authenticated document upload, list, replace, and delete.
+- [x] Index text, Markdown, and text-based PDF passages as FastEmbed vectors in Qdrant.
+- [x] Route order and high-stakes requests before document retrieval.
+- [x] Use Groq structured output to select exact evidence quotes; validate them and hand off on uncertainty.
+- [x] Show document evidence in the chat UI and test the upload-to-answer path.
+- [ ] Upload approved company documents, review stale/conflicting content, and measure answers on held-out real questions.
+
+## Phase 3 — Evaluation and resilience (local tooling complete); production validation pending
+
+- [x] Expose the support decision flow as a local stdio MCP tool with signed order identity and persistent handoff behavior.
+- [x] Test MCP tool discovery and calls through the SDK protocol.
+
+- [x] Score labeled cases for case accuracy and handoff precision and recall.
+- [x] Test authorization, conflicting and stale status, upstream failure, prompt injection, and an HTTP ticket flow.
+- [x] Prevent untrusted carrier detail from becoming an answer.
+- [x] Add optional AI routing for paraphrases while retaining deterministic authorization and source-backed answers.
+- [x] Test simulated model responses, invalid source IDs, low confidence, and AI outages.
+- [x] Add Groq structured-output routing for `openai/gpt-oss-120b` and local `.env` loading.
+- [x] Add a large-catalog candidate shortlist and a configuration doctor command.
+- [ ] Supply a held-out set of redacted real customer questions and review incorrect confident answers.
+- [ ] Measure live model routing accuracy and calibrate the confidence threshold on that set.
+- [ ] Agree on acceptance thresholds for real data, languages, and traffic patterns.
+- [ ] Run end-to-end tests against staging store services.
+
+## Phase 4 — Deployment preparation (complete); launch pending
+
+- [x] Provide a non-root Docker image, sample configuration, security guidance, and an operator runbook.
+- [x] Configure the wheel and container for production startup.
+- [x] Require explicit production configuration and durable handoff storage.
+- [ ] Deploy behind TLS, storefront authentication, rate limits, monitoring, and backup.
+- [ ] Set support owners, response time targets, data retention, and incident procedures.
+- [ ] Gradually enable production traffic and monitor wrong answers and handoffs.
+
+The remaining items require real store systems, approved content, a human support owner, and a deployment environment. Production readiness cannot be claimed until those checks pass.
